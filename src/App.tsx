@@ -22,7 +22,7 @@ function App() {
             {id: todolistId2, title: "Learn and listen", filter: "all"},
         ]
     )
-    const [tasks, setTasks] = useState({
+    const [tasksObj, setTasks] = useState({
         // id todolist-а:
         [todolistId1]:
         // таски
@@ -50,9 +50,15 @@ function App() {
 
     }
 
-    function removeTask(id: string) {
-        const filtredTasks = tasks.filter(t => t.id !== id)
-        setTasks(filtredTasks)
+    function removeTask(id: string, todolistId: string) {
+        // находим нужный массив с таской
+        const tasks = tasksObj[todolistId]
+        // в этом массиве получаем отфильтрованные таски
+        const filteredTasks = tasks.filter(t => t.id !== todolistId)
+       // перезапишем таски которые достали отфильтрованными тасками
+        tasksObj[todolistId] = filteredTasks
+        // и отправляем новый объект tasksObj в setTasks
+        setTasks({...tasksObj})
     }
 
     function addTask(title: string) {
