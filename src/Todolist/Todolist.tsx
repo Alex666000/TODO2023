@@ -27,6 +27,7 @@ export function Todolist(props: PropsType) {
     const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTaskTitle(e.currentTarget.value)
     }
+
     const onNewTitleKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
         if (e.ctrlKey && e.keyCode === 13) {
@@ -34,6 +35,7 @@ export function Todolist(props: PropsType) {
             setNewTaskTitle("")
         }
     }
+
     const addTask = () => {
         // если то что ввели в поле пустая строка или ничего не ввели - trim() обрежет пробелы
         if (newTaskTitle.trim() !== "") {
@@ -42,19 +44,17 @@ export function Todolist(props: PropsType) {
         }
         setError("Поле обязательно")
     }
+
     const onAllClickHandler = () => {
-        props.changeFilter("all",props.todolistId)
+        props.changeFilter("all", props.todolistId)
     }
     const onActiveClickHandler = () => {
-        props.changeFilter("active",props.todolistId)
+        props.changeFilter("active", props.todolistId)
     }
     const onCompletedClickHandler = () => {
-        props.changeFilter("completed",props.todolistId)
+        props.changeFilter("completed", props.todolistId)
     }
 
-
-    // @ts-ignore
-    // @ts-ignore
     return <div>
         <h3>{props.title}</h3>
         <div>
