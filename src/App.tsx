@@ -11,9 +11,7 @@ export type Todolists = {
     filter: FilterValueType
 }
 
-
 function App() {
-
     const todolistId1 = v1()
     const todolistId2 = v1()
 
@@ -88,17 +86,16 @@ function App() {
         }
     }
 
-
     return (
         <div className="App">
             {todolists.map((tl) => {
                 // функция вызовется столько раз сколько объектов в тудулисте
-                let tasksForTodolist = tasks[tl.id]
+                let tasksForTodolist = tasksObj[tl.id]
 
 // фильтр берем из тудулиста
-                if (tl.filter === "completed") tasksForTodolist = tasks[tl.id].filter(t => t.isDone)
+                if (tl.filter === "completed") tasksForTodolist = tasksObj[tl.id].filter(t => t.isDone)
 
-                if (tl.filter === "completed") tasksForTodolist = tasks[tl.id].filter(t => !t.isDone)
+                if (tl.filter === "completed") tasksForTodolist = tasksObj[tl.id].filter(t => !t.isDone)
 
                 return <Todolist
                     todolistId={tl.id}
