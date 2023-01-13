@@ -77,7 +77,15 @@ function App() {
     }
 
     function changeTaskStatus(taskId: string, isDone: boolean, todolistId: string) {
-
+        // находим нужный массив с таской
+        const tasks = tasksObj[todolistId]
+        // в этом массиве тасок нашли нужную таску
+        const task = tasks.find(t => t.id === taskId)
+        // если она нашлась её изменили
+        if (task) {
+            task.isDone = isDone
+            setTasks({...tasksObj})
+        }
     }
 
 
