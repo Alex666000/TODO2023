@@ -47,7 +47,14 @@ function App() {
             todolist.filter = filterValue
         }
         setTodolists([...todolists])
-
+    }
+    function removeTodolist(todolistId: string) {
+        const filteredTodolists = todolists.filter(tl => tl.id !== todolistId)
+        setTodolists(filteredTodolists)
+        // удаляем таки для удаленного тудулиста
+        delete tasksObj[todolistId]
+        //  устанавливаем новый объект в стейт
+        setTasks({...tasksObj})
     }
 
     function removeTask(id: string, todolistId: string) {
@@ -104,6 +111,7 @@ function App() {
                     addTask={addTask}
                     changeFilter={changeFilter}
                     removeTask={removeTask}
+                    removeTodolist={removeTodolist}
                     title={tl.title}
                     filter={tl.filter}
                     tasks={tasksForTodolist}
