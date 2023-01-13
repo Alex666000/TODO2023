@@ -23,18 +23,20 @@ function App() {
         ]
     )
     const [tasksObj, setTasks] = useState({
-        // id todolist-а:
+        // id todolist-а 1:
         [todolistId1]:
         // таски
+        // 1 - first array tasks:
             [
                 {id: v1(), title: "HTML&CSS", isDone: true}, // task
                 {id: v1(), title: "JS", isDone: true},   // task
                 {id: v1(), title: "ReactJS", isDone: false},   // task
                 {id: v1(), title: "Redux", isDone: true}   // task
             ],
-        // id todolist-а:
+        // id todolist-а 2:
         [todolistId2]:
         // таски
+        // 2 - second array tasks:
             [
                 {id: v1(), title: "Book", isDone: true}, // task
                 {id: v1(), title: "Milk", isDone: true},   // task
@@ -55,22 +57,27 @@ function App() {
         const tasks = tasksObj[todolistId]
         // в этом массиве получаем отфильтрованные таски
         const filteredTasks = tasks.filter(t => t.id !== todolistId)
-       // перезапишем таски которые достали отфильтрованными тасками
+        // перезапишем таски которые достали отфильтрованными тасками
         tasksObj[todolistId] = filteredTasks
         // и отправляем новый объект tasksObj в setTasks
         setTasks({...tasksObj})
     }
 
-    function addTask(title: string) {
+    function addTask(title: string, todolistId: string) {
+        // создали новую таску - ее теперь надо добавить - куда?
         const newTask = {id: v1(), title: title, isDone: false}
+        // находим нужный массив с таской (дин из 2-x, либо этот либо тот...)
+        const tasks = tasksObj[todolistId]
+        // в этот массив добавим таску
         const newTasks = [newTask, ...tasks]
-        setTasks(newTasks)
+        // новые таски засовываю обратно по такому ключу tasksObj[todolistId] в объект
+        tasksObj[todolistId] = newTasks
+        // и отправляем новый объект tasksObj в setTasks
+        setTasks({...tasksObj})
     }
 
-    function changeTaskStatus(taskId: string, isDone: boolean) {
-        const task = tasks.find(t => t.id === taskId)
-        if (task) task.isDone = isDone
-        setTasks([...tasks])
+    function changeTaskStatus(taskId: string, isDone: boolean, todolistId: string) {
+
     }
 
 
