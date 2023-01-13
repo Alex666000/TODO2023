@@ -14,10 +14,10 @@ type PropsType = {
     tasks: Array<TaskType>
     filter: FilterValueType
     todolistId: string
-    removeTask: (id: string) => void
+    removeTask: (id: string, todolistId: string) => void
     changeFilter: (filterValue: FilterValueType, todolistId: string) => void
-    addTask: (newTaskTitle: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    addTask: (title: string, todolistId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -31,7 +31,7 @@ export function Todolist(props: PropsType) {
     const onNewTitleKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
         if (e.ctrlKey && e.keyCode === 13) {
-            props.addTask(newTaskTitle)
+            props.addTask(newTaskTitle, props.todolistId)
             setNewTaskTitle("")
         }
     }
@@ -39,7 +39,7 @@ export function Todolist(props: PropsType) {
     const addTask = () => {
         // если то что ввели в поле пустая строка или ничего не ввели - trim() обрежет пробелы
         if (newTaskTitle.trim() !== "") {
-            props.addTask(newTaskTitle.trim())
+            props.addTask(newTaskTitle.trim(),props.todolistId)
             setNewTaskTitle("")
         }
         setError("Поле обязательно")
@@ -71,11 +71,11 @@ export function Todolist(props: PropsType) {
 
             {props.tasks.map(t => {
                     const onRemoveTask = () => {
-                        props.removeTask(t.id)
+                        props.removeTask(t.id,props.todolistId)
                     }
 
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        props.changeTaskStatus(t.id, e.currentTarget.checked)
+                        props.changeTaskStatus(t.id, e.currentTarget.checked,props.todolistId)
                     }
 
                     return <li className={t.isDone ? "is-done" : ""} key={t.id}>
