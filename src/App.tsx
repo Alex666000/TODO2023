@@ -96,3 +96,7 @@ function App() {
 }
 
 export default App;
+
+
+//yarn add  @formkit/auto-animate -D
+

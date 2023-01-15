@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {FilterValueType} from "../App";
 import {Simulate} from "react-dom/test-utils";
+import {useAutoAnimate} from "@formkit/auto-animate/react";
 
 
 export type TaskType = {
@@ -24,6 +25,9 @@ type PropsType = {
 export function Todolist(props: PropsType) {
     const [newTaskTitle, setNewTaskTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
+
+    const [listRef] = useAutoAnimate<HTMLUListElement>()
+
 
     const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTaskTitle(e.currentTarget.value)
@@ -74,7 +78,7 @@ export function Todolist(props: PropsType) {
             <button onClick={addTask}>+</button>
             {error && <div className={"error-message"}>{error}</div>}
         </div>
-        <ul>
+        <ul ref={listRef}>
 
             {props.tasks.map(t => {
                     const onRemoveTask = () => {
