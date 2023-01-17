@@ -84,6 +84,9 @@ function App() {
     function addTodolist(newTitle: string) {
         const newTodolist: TodolistType = {id: todolistId1, title: newTitle, filter: "all"}
         setTodolists([newTodolist, ...todolists])
+        //добавляем еще одно свойство - таски для нового тудулиста - название которого id
+        // сгенерированного тудулиста {id: todolistId1, title: newTitle, filter: "all"}
+        setTasks({...tasksObj, [newTodolist.id]: []})
     }
 
     return (
