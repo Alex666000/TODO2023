@@ -22,6 +22,7 @@ type PropsType = {
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
     changeTaskTitle: (todolistId: string,taskId: string, newTitle: string, ) => void
     removeTodolist: (todolistId: string) => void
+    changeTodolistTitle: (todolistId: string, newTitle: string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -41,13 +42,16 @@ export function Todolist(props: PropsType) {
         props.removeTodolist(props.todolistId)
     }
 
+    const changeTodolistTitle = (newTitle: string) => {
+        props.changeTodolistTitle(props.todolistId, newTitle)
+    }
+
     const addTask = (title: string) => {
         props.addTask(title, props.todolistId)
     }
 
     return <div>
-        {/*кнопка удаления тудулиста*/}
-        <h3>{props.title}
+        <h3><EditableSpan title={props.title} onChange={changeTodolistTitle}/>
             <button onClick={removeTodolist}>X</button>
         </h3>
         <div>
@@ -75,7 +79,6 @@ export function Todolist(props: PropsType) {
                                 checked={t.isDone}
                                 onChange={onStatusChangeHandler}
                             />
-                            {/*<span>{t.title}</span>*/}
                             <EditableSpan
                                 title={t.title}
                                 onChange={onTitleChangeHandler}
