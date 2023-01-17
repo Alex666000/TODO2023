@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from "react";
 import {FilterValueType} from "../App";
 import {AddItemForm} from "./AddItemForm";
+import {EditableSpan} from "./EditableSpan";
 
 
 export type TaskType = {
@@ -43,7 +44,7 @@ export function Todolist(props: PropsType) {
             <button onClick={removeTodolist}>X</button>
         </h3>
         <div>
-            <AddItemForm  addItem={(newTitle) =>props.addTask(newTitle, props.todolistId)}/>
+            <AddItemForm addItem={(newTitle) => props.addTask(newTitle, props.todolistId)}/>
         </div>
         <ul>
 
@@ -63,7 +64,7 @@ export function Todolist(props: PropsType) {
                             onChange={onChangeHandler}
                         />
 
-                        <span>{t.title}</span>
+                        <EditableSpan title={t.title}/>
                         <button onClick={onRemoveTask}>X
                         </button>
                     </li>
