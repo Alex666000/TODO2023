@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import {FilterValueType} from "../App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
+import {useAutoAnimate} from "@formkit/auto-animate/react";
 
 
 export type TaskType = {
@@ -19,10 +20,14 @@ type PropsType = {
     changeTodolistFilter: (filterValue: FilterValueType, todolistId: string) => void
     addTask: (title: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
+    changeTaskTitle: (taskId: string, newTitle: string, todolistId: string) => void
     removeTodolist: (todolistId: string) => void
+    changeTodolistTitle: (todolistId: string, title : string) => void
 }
 
 export function Todolist(props: PropsType) {
+    const [listRef] = useAutoAnimate<HTMLUListElement>()
+
 
     const onAllClickHandler = () => {
         props.changeTodolistFilter("all", props.todolistId)
@@ -38,15 +43,19 @@ export function Todolist(props: PropsType) {
         props.removeTodolist(props.todolistId)
     }
 
+    const changeTodolistTitle = (title: string) => {
+        props.changeTodolistTitle(props.todolistId,title)
+    }
+
     return <div>
         {/*кнопка удаления тудулиста*/}
-        <h3>{props.title}
+        <h3><EditableSpan title={props.title} onNewTitleChange={changeTodolistTitle}/>
             <button onClick={removeTodolist}>X</button>
         </h3>
         <div>
             <AddItemForm addItem={(newTitle) => props.addTask(newTitle, props.todolistId)}/>
         </div>
-        <ul>
+        <ul ref={listRef}>
 
             {props.tasks.map(t => {
                     const onRemoveTask = () => {
@@ -57,6 +66,10 @@ export function Todolist(props: PropsType) {
                         props.changeTaskStatus(t.id, e.currentTarget.checked, props.todolistId)
                     }
 
+                    const changeTaskTitle = (newTitle: string) => {
+                        props.changeTaskTitle(props.todolistId, t.id, newTitle)
+                    }
+
                     return <li className={t.isDone ? "is-done" : ""} key={t.id}>
                         <input
                             type="checkbox"
@@ -64,7 +77,8 @@ export function Todolist(props: PropsType) {
                             onChange={onChangeHandler}
                         />
 
-                        {/*<EditableSpan title={t.title} onNewTitleChange={ (newTitle) => {props.} }/>*/}
+                        <EditableSpan title={t.title}
+                                      onNewTitleChange={changeTaskTitle}/>
                         <button onClick={onRemoveTask}>X
                         </button>
                     </li>

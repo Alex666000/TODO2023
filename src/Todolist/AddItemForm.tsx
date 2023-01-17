@@ -8,9 +8,6 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     const [newTitle, setNewTitle] = useState("")
     const [error, setError] = useState<string | null>(null)
 
-    const [listRef] = useAutoAnimate<HTMLUListElement>()
-
-
     const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTitle(e.currentTarget.value)
     }
