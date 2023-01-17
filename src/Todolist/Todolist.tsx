@@ -40,7 +40,6 @@ export function Todolist(props: PropsType) {
     }
 
     const addTask = (title: string) => {
-        
         props.addTask(title, props.todolistId)
     }
 
@@ -50,7 +49,7 @@ export function Todolist(props: PropsType) {
             <button onClick={removeTodolist}>X</button>
         </h3>
         <div>
-          <AddItemForm addItem={addTask}/>
+            <AddItemForm addItem={addTask}/>
         </div>
         <ul ref={listRef}>
 
@@ -63,17 +62,18 @@ export function Todolist(props: PropsType) {
                         props.changeTaskStatus(t.id, e.currentTarget.checked, props.todolistId)
                     }
 
-                    return <li className={t.isDone ? "is-done" : ""} key={t.id}>
-                        <input
-                            type="checkbox"
-                            checked={t.isDone}
-                            onChange={onChangeHandler}
-                        />
-
-                        <span>{t.title}</span>
-                        <button onClick={onRemoveTask}>X
-                        </button>
-                    </li>
+                    return (
+                        <li className={t.isDone ? "is-done" : ""} key={t.id}>
+                            <input
+                                type="checkbox"
+                                checked={t.isDone}
+                                onChange={onChangeHandler}
+                            />
+                            {/*<span>{t.title}</span>*/}
+                            <EditableSpan title={t.title}/>
+                            <button onClick={onRemoveTask}>X
+                            </button>
+                        </li>)
                 }
             )}
         </ul>
@@ -89,5 +89,13 @@ export function Todolist(props: PropsType) {
             </button>
         </div>
     </div>
+}
+
+type EditableSpanPropsType = {
+    title: string
+}
+
+const EditableSpan = (props: EditableSpanPropsType) => {
+    return <span>{props.title}</span>
 }
 
