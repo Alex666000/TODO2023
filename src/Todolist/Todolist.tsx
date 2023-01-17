@@ -1,7 +1,6 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent} from "react";
 import {FilterValueType} from "../App";
-import {Simulate} from "react-dom/test-utils";
-import {useAutoAnimate} from "@formkit/auto-animate/react";
+import {AddItemForm} from "./AddItemForm";
 
 
 export type TaskType = {
@@ -23,32 +22,6 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
-    const [newTaskTitle, setNewTaskTitle] = useState("")
-    const [error, setError] = useState<string | null>(null)
-
-    const [listRef] = useAutoAnimate<HTMLUListElement>()
-
-
-    const onNewTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(e.currentTarget.value)
-    }
-
-    const onNewTitleKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
-        if (e.ctrlKey && e.keyCode === 13) {
-            props.addTask(newTaskTitle, props.todolistId)
-            setNewTaskTitle("")
-        }
-    }
-
-    const addTask = () => {
-        // если то что ввели в поле пустая строка или ничего не ввели - trim() обрежет пробелы
-        if (newTaskTitle.trim() !== "") {
-            props.addTask(newTaskTitle.trim(),props.todolistId)
-            setNewTaskTitle("")
-        }
-        setError("Поле обязательно")
-    }
 
     const onAllClickHandler = () => {
         props.changeTodolistFilter("all", props.todolistId)
@@ -66,27 +39,21 @@ export function Todolist(props: PropsType) {
 
     return <div>
         {/*кнопка удаления тудулиста*/}
-        <h3>{props.title} <button onClick={removeTodolist}>X</button>
+        <h3>{props.title}
+            <button onClick={removeTodolist}>X</button>
         </h3>
         <div>
-            <input
-                className={error ? "error" : ""}
-                value={newTaskTitle}
-                onKeyDown={onNewTitleKeyDownHandler}
-                onChange={onNewTitleChangeHandler}
-            />
-            <button onClick={addTask}>+</button>
-            {error && <div className={"error-message"}>{error}</div>}
+            <AddItemForm  addItem={(newTitle) =>props.addTask(newTitle, props.todolistId)}/>
         </div>
-        <ul ref={listRef}>
+        <ul>
 
             {props.tasks.map(t => {
                     const onRemoveTask = () => {
-                        props.removeTask(t.id,props.todolistId)
+                        props.removeTask(t.id, props.todolistId)
                     }
 
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        props.changeTaskStatus(t.id, e.currentTarget.checked,props.todolistId)
+                        props.changeTaskStatus(t.id, e.currentTarget.checked, props.todolistId)
                     }
 
                     return <li className={t.isDone ? "is-done" : ""} key={t.id}>
