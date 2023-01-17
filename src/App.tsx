@@ -13,6 +13,7 @@ export type TodolistType = {
 }
 
 function App() {
+
     function changeTodolistFilter(filterValue: FilterValueType, todolistId: string) {
         const finedTodolist = todolists.find(tl => tl.id === todolistId)
         if (finedTodolist) {

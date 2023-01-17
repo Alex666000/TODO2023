@@ -64,7 +64,7 @@ export function Todolist(props: PropsType) {
                             onChange={onChangeHandler}
                         />
 
-                        <EditableSpan title={t.title}/>
+                        {/*<EditableSpan title={t.title} onNewTitleChange={ (newTitle) => {props.} }/>*/}
                         <button onClick={onRemoveTask}>X
                         </button>
                     </li>
