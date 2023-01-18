@@ -34,6 +34,9 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     return <>
         <TextField
             variant={'outlined'}
+            // если ошибка будет  текст покажется - используем вместо такой строки:
+            // {error && <div className={"error-message"}>{error}</div>}
+            helperText={error}
             label={'type value'}
             // className={error ? "error" : ""}
             error={!!error} // если строка существет тогда  error
@@ -42,8 +45,11 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             onKeyDown={onNewTitleKeyDownHandler}
             onChange={onNewTitleChangeHandler}
         />
-        <Button variant={'contained'} color={'primary'} onClick={addTask}>+</Button>
-        {error && <div className={"error-message"}>{error}</div>}
+        <Button
+            variant={'contained'}
+            color={'primary'}
+            onClick={addTask}>+</Button>
+        {/*{error && <div className={"error-message"}>{error}</div>}*/}
     </>
 
 }
