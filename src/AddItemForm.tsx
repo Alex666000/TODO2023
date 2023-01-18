@@ -38,7 +38,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             // если ошибка будет  текст покажется - используем вместо такой строки:
             // {error && <div className={"error-message"}>{error}</div>}
             helperText={error}
-            label={"type value"}
+            label={error}
             // className={error ? "error" : ""}
             error={!!error} // если строка существет тогда  error
             // превратили строку error в булево значение с !!
