@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import Button from "@mui/material/Button";
-import {TextField} from "@mui/material";
+import {IconButton, TextField} from "@mui/material";
+import {ControlPointSharp} from "@mui/icons-material";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
@@ -33,11 +34,11 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
 
     return <>
         <TextField
-            variant={'outlined'}
+            variant={"outlined"}
             // если ошибка будет  текст покажется - используем вместо такой строки:
             // {error && <div className={"error-message"}>{error}</div>}
             helperText={error}
-            label={'type value'}
+            label={"type value"}
             // className={error ? "error" : ""}
             error={!!error} // если строка существет тогда  error
             // превратили строку error в булево значение с !!
@@ -45,10 +46,19 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             onKeyDown={onNewTitleKeyDownHandler}
             onChange={onNewTitleChangeHandler}
         />
-        <Button
-            variant={'contained'}
-            color={'primary'}
-            onClick={addTask}>+</Button>
+        {/*<Button*/}
+        {/*    variant={'contained'}*/}
+        {/*    color={'primary'}*/}
+        {/*    onClick={addTask}>*/}
+        {/*    +*/}
+        {/*</Button>*/}
+        {/*вместо кнопки + сделали икноку <ControlPointSharp/>*/}
+        <IconButton
+            color={"primary"}
+            onClick={addTask}>
+            <ControlPointSharp/>
+        </IconButton>
+
         {/*{error && <div className={"error-message"}>{error}</div>}*/}
     </>
 
