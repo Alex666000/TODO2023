@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import "./App.css";
-import {TaskType, Todolist} from "./Todolist/Todolist";
+import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "./Todolist/AddItemForm";
+import {AddItemForm} from "./AddItemForm";
 
 export type FilterValueType = "all" | "completed" | "active"
 
