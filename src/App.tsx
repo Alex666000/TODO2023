@@ -4,6 +4,7 @@ import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {Menu} from "@mui/icons-material";
 
 export type FilterValueType = "all" | "completed" | "active"
 
@@ -14,10 +15,6 @@ export type TodolistType = {
 }
 export type TasksStateType = {
     [key: string]: TaskType[]
-}
-
-function MenuIcon() {
-    return null;
 }
 
 function App() {
@@ -127,7 +124,7 @@ function App() {
                         aria-label="menu"
                         sx={{mr: 2}}
                     >
-                        <MenuIcon/>
+                        <Menu/>
                     </IconButton>
                     <Typography
                         variant="h6" component="div" sx={{flexGrow: 1}}>
