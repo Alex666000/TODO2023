@@ -20,7 +20,7 @@ type PropsType = {
     filter: FilterValueType
     todolistId: string
     removeTask: (id: string, todolistId: string) => void
-    changeFilter: (filterValue: FilterValueType, todolistId: string) => void
+    changeFilterToTodolist: (filterValue: FilterValueType, todolistId: string) => void
     addTask: (title: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
     changeTaskTitle: (todolistId: string, taskId: string, newTitle: string,) => void
@@ -32,13 +32,13 @@ export function Todolist(props: PropsType) {
     const [listRef] = useAutoAnimate<HTMLUListElement>()
 
     const onAllClickHandler = () => {
-        props.changeFilter("all", props.todolistId)
+        props.changeFilterToTodolist("all", props.todolistId)
     }
     const onActiveClickHandler = () => {
-        props.changeFilter("active", props.todolistId)
+        props.changeFilterToTodolist("active", props.todolistId)
     }
     const onCompletedClickHandler = () => {
-        props.changeFilter("completed", props.todolistId)
+        props.changeFilterToTodolist("completed", props.todolistId)
     }
 
     const removeTodolist = () => {

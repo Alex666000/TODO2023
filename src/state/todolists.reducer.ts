@@ -62,7 +62,7 @@ export const removeTodolistAC = (todolistId: string): RemoveTodolistActionType =
         type: "REMOVE-TODOLIST", id: todolistId
     }
 }
-export const addTodolistAC = (newTodolistTitle: string,todolistId: string): AddTodolistActionType => {
+export const addTodolistAC = (newTodolistTitle: string): AddTodolistActionType => {
     return {
         type: "ADD-TODOLIST", title: newTodolistTitle, todolistId: v1()
     }
