@@ -1,5 +1,5 @@
 // согласно прописаному type в этом action (инструкции) я поменяю state
-import {FilterValueType, TasksStateType, TodolistType} from "../App";
+import {TasksStateType} from "../AppWithRedux";
 import {v1} from "uuid";
 import {AddTodolistActionType, RemoveTodolistActionType, todolistId1, todolistId2} from "./todolists.reducer";
 
