@@ -2,13 +2,6 @@
 import {FilterValueType, TodolistType} from "../App";
 import {v1} from "uuid";
 
-type StateType = TodolistType[]
-
-type ActionType = {
-    type: string
-    [key: string]: any
-}
-
 export type RemoveTodolistActionType = {
     type: "REMOVE-TODOLIST"
     id: string
@@ -36,7 +29,16 @@ type ActionsType =
     | ChangeTodolistFilterActionType
 
 
-export const todolistsReducer = (state: StateType, action: ActionsType): StateType => {
+export const todolistId1 = v1()
+export const todolistId2 = v1()
+
+const initialState: TodolistType[] = [
+    {id: todolistId1, title: "What to learn", filter: "all"},
+    {id: todolistId2, title: "Learn and listen", filter: "all"},
+]
+
+// редюсер - чистая функция меняющая конкретный подстейт store-а
+export const todolistsReducer = (state: TodolistType[] = initialState, action: ActionsType): TodolistType[] => {
     switch (action.type) {
         case "REMOVE-TODOLIST": {
             return state.filter(tl => tl.id !== action.id)

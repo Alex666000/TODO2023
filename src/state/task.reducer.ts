@@ -1,9 +1,7 @@
 // согласно прописаному type в этом action (инструкции) я поменяю state
 import {FilterValueType, TasksStateType, TodolistType} from "../App";
 import {v1} from "uuid";
-import {AddTodolistActionType, RemoveTodolistActionType} from "./todolists.reducer";
-
-type StateType = TasksStateType
+import {AddTodolistActionType, RemoveTodolistActionType, todolistId1, todolistId2} from "./todolists.reducer";
 
 type RemoveTaskActionType = {
     type: "REMOVE-TASK"
@@ -34,7 +32,23 @@ type ActionsType = RemoveTaskActionType
     | RemoveTodolistActionType | ChangeTaskTitleActionType
 
 
-export const tasksReducer = (state: StateType, action: ActionsType): TasksStateType => {
+const initialState: TasksStateType = {
+    [todolistId1]:
+        [
+            {id: v1(), title: "HTML&CSS", isDone: true}, // task
+            {id: v1(), title: "JS", isDone: true},   // task
+            {id: v1(), title: "ReactJS", isDone: false},   // task
+            {id: v1(), title: "Redux", isDone: true}   // task
+        ],
+    [todolistId2]:
+        [
+            {id: v1(), title: "Book", isDone: true}, // task
+            {id: v1(), title: "Milk", isDone: true},   // task
+        ],
+}
+
+// редюсер - чистая функция меняющая конкретный подстейт store-а
+export const tasksReducer = (state: TasksStateType = initialState, action: ActionsType): TasksStateType => {
     switch (action.type) {
         case "REMOVE-TASK": {
             // return {

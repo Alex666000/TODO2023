@@ -6,6 +6,9 @@ import {EditableSpan} from "./EditableSpan";
 import IconButton from "@mui/material/IconButton";
 import {Delete} from "@mui/icons-material";
 import {Button, Checkbox} from "@mui/material";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "./state/store";
+import {TasksStateType} from "./AppWithRedux";
 
 
 export type TaskType = {
@@ -29,6 +32,8 @@ type PropsType = {
 }
 
 export function Todolist(props: PropsType) {
+
+
     const [listRef] = useAutoAnimate<HTMLUListElement>()
 
     const onAllClickHandler = () => {
